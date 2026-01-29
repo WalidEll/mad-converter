@@ -26,5 +26,8 @@
     "tailwindcss": "^4",
     "typescript": "^5",
     "wrangler": "^4.61.1"
+  },
+  "overrides": {
+    "@swc/helpers": "0.5.18"
   }
 }
