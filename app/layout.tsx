@@ -1,7 +1,6 @@
 import type {Metadata} from 'next';
 import {Geist, Geist_Mono} from 'next/font/google';
-import {NextIntlClientProvider} from 'next-intl';
-import {getLocale, getMessages} from 'next-intl/server';
+import {getLocale} from 'next-intl/server';
 import './globals.css';
 
 const geistSans = Geist({
@@ -26,12 +25,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
-  const messages = await getMessages();
+  const dir = locale === 'ar-ma' ? 'rtl' : 'ltr';
 
   return (
-    <html lang={locale} dir="ltr">
+    <html lang={locale} dir={dir}>
       <body className={`${geistSans.variable} ${geistMono.variable} min-h-dvh bg-zellij antialiased`}>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        {children}
       </body>
     </html>
   );

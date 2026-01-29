@@ -1,5 +1,7 @@
 import type {Metadata} from 'next';
 import {notFound} from 'next/navigation';
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages} from 'next-intl/server';
 import {locales, type Locale} from '@/i18n/request';
 
 const seo: Record<Locale, {title: string; description: string; dir: 'ltr' | 'rtl'}> = {
@@ -91,11 +93,8 @@ export default async function LocaleLayout({
 }) {
   const {locale} = await params;
   if (!locales.includes(locale as Locale)) notFound();
-  const l = locale as Locale;
 
-  return (
-    <html lang={l} dir={seo[l].dir}>
-      <body>{children}</body>
-    </html>
-  );
+  const messages = await getMessages();
+
+  return <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>;
 }
