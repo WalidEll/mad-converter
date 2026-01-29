@@ -2,21 +2,30 @@ import type {Metadata} from 'next';
 import {notFound} from 'next/navigation';
 import {locales, type Locale} from '@/i18n/request';
 
-const seo: Record<Locale, {title: string; description: string}> = {
-  ar: {
+const seo: Record<Locale, {title: string; description: string; dir: 'ltr' | 'rtl'}> = {
+  'ar-ma': {
+    title: 'MAD Converter — محول مغربي محلي (MAD • Ryal • Franc)',
+    description:
+      'محول مغربي محلي باش يسهّل عليك الحياة اليومية. تحويل MAD ↔ Ryal ↔ Franc (وحدات محلية).',
+    dir: 'rtl'
+  },
+  'ar-fr': {
     title: 'MAD Converter — Moroccan Local Converter (MAD • Ryal • Franc)',
     description:
-      'Moroccan local converter to make it easy for your everyday life. Convert MAD ↔ Ryal ↔ Franc (local units).'
+      'Moroccan local converter to make it easy for your everyday life. Convert MAD ↔ Ryal ↔ Franc (local units).',
+    dir: 'ltr'
   },
   fr: {
     title: 'MAD Converter — Convertisseur local marocain (MAD • Ryal • Franc)',
     description:
-      'Convertisseur local marocain pour faciliter votre vie au quotidien. Conversion MAD ↔ Ryal ↔ Franc (unités locales).'
+      'Convertisseur local marocain pour faciliter votre vie au quotidien. Conversion MAD ↔ Ryal ↔ Franc (unités locales).',
+    dir: 'ltr'
   },
   en: {
     title: 'MAD Converter — Moroccan Local Converter (MAD • Ryal • Franc)',
     description:
-      'Moroccan local converter to make it easy for your everyday life. Convert MAD ↔ Ryal ↔ Franc (local units).'
+      'Moroccan local converter to make it easy for your everyday life. Convert MAD ↔ Ryal ↔ Franc (local units).',
+    dir: 'ltr'
   }
 };
 
@@ -49,7 +58,8 @@ export async function generateMetadata({
     alternates: {
       canonical: `/${l}`,
       languages: {
-        ar: '/ar',
+        'ar-ma': '/ar-ma',
+        'ar-fr': '/ar-fr',
         fr: '/fr',
         en: '/en'
       }
@@ -72,10 +82,20 @@ export async function generateMetadata({
   };
 }
 
-export default function LocaleLayout({
-  children
+export default async function LocaleLayout({
+  children,
+  params
 }: {
   children: React.ReactNode;
+  params: Promise<{locale: string}>;
 }) {
-  return children;
+  const {locale} = await params;
+  if (!locales.includes(locale as Locale)) notFound();
+  const l = locale as Locale;
+
+  return (
+    <html lang={l} dir={seo[l].dir}>
+      <body>{children}</body>
+    </html>
+  );
 }

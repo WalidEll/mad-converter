@@ -4,7 +4,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
   const now = new Date();
 
-  const paths = ['/ar', '/fr', '/en'];
+  const paths = ['/ar-ma', '/ar-fr', '/fr', '/en'];
 
   return paths.map((p) => ({
     url: `${base}${p}`,

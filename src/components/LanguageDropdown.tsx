@@ -4,13 +4,14 @@ import {useLocale, useTranslations} from 'next-intl';
 import {usePathname as useNextPathname, useRouter} from 'next/navigation';
 
 const labels: Record<string, string> = {
-  ar: 'Darija',
+  'ar-fr': 'Darija (Latin)',
+  'ar-ma': 'Darija (عربية)',
   fr: 'Français',
   en: 'English'
 };
 
 function stripLocale(pathname: string) {
-  const cleaned = pathname.replace(/^\/(ar|fr|en)(?=\/|$)/, '');
+  const cleaned = pathname.replace(/^\/(ar-fr|ar-ma|fr|en)(?=\/|$)/, '');
   return cleaned === '' ? '/' : cleaned;
 }
 
@@ -36,7 +37,7 @@ export default function LanguageDropdown() {
           router.push(toLocalePath(next));
         }}
       >
-        {(['ar', 'fr', 'en'] as const).map((l) => (
+        {(['ar-ma', 'ar-fr', 'fr', 'en'] as const).map((l) => (
           <option key={l} value={l}>
             {labels[l]}
           </option>
