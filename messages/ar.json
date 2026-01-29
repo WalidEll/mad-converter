@@ -1,0 +1,17 @@
+{
+  "app": {
+    "title": "MAD Converter",
+    "subtitle": "Moroccan local converter باش يسهّل عليك الحياة اليومية.",
+    "lang": "Logha",
+    "amount": "L-mablagh",
+    "unit": "L-w7da",
+    "mad": "MAD",
+    "ryal": "Ryal",
+    "franc": "Franc",
+    "results": "Nta2ij",
+    "copy": "Copy",
+    "copied": "Copied",
+    "quick": "Qimat sra3",
+    "disclaimer": "Tbdil m7alli (thabit): 1 MAD = 20 ryal = 100 franc. Machi taux dyal sarf."
+  }
+}

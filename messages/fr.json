@@ -1,0 +1,17 @@
+{
+  "app": {
+    "title": "MAD Converter",
+    "subtitle": "Convertisseur local marocain pour faciliter votre vie au quotidien.",
+    "lang": "Langue",
+    "amount": "Montant",
+    "unit": "Unité",
+    "mad": "MAD",
+    "ryal": "Ryal",
+    "franc": "Franc",
+    "results": "Résultats",
+    "copy": "Copier",
+    "copied": "Copié",
+    "quick": "Montants rapides",
+    "disclaimer": "Conversion locale (fixe) : 1 MAD = 20 ryal = 100 franc. Ce n’est pas un taux de change."
+  }
+}
