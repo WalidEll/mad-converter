@@ -1,8 +1,7 @@
 'use client';
 
 import {useLocale, useTranslations} from 'next-intl';
-import {usePathname as useNextPathname} from 'next/navigation';
-import {useRouter} from '@/i18n/navigation';
+import {usePathname as useNextPathname, useRouter} from 'next/navigation';
 
 const labels: Record<string, string> = {
   ar: 'Darija',
@@ -21,13 +20,21 @@ export default function LanguageDropdown() {
   const router = useRouter();
   const pathname = stripLocale(useNextPathname() || '/');
 
+  const toLocalePath = (l: string) => {
+    const suffix = pathname === '/' ? '' : pathname;
+    return `/${l}${suffix}`;
+  };
+
   return (
     <label className="flex items-center gap-2">
       <span className="text-xs font-medium text-slate-600">{t('lang')}</span>
       <select
         className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold text-slate-800 shadow-sm outline-none focus:border-emerald-400"
         value={locale}
-        onChange={(e) => router.replace(pathname, {locale: e.target.value as any})}
+        onChange={(e) => {
+          const next = e.target.value;
+          router.push(toLocalePath(next));
+        }}
       >
         {(['ar', 'fr', 'en'] as const).map((l) => (
           <option key={l} value={l}>
