@@ -3,6 +3,7 @@ import {notFound} from 'next/navigation';
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
 import {locales, type Locale} from '@/i18n/request';
+import HtmlLangDir from '@/components/HtmlLangDir';
 
 const seo: Record<Locale, {title: string; description: string; dir: 'ltr' | 'rtl'}> = {
   'ar-ma': {
@@ -96,5 +97,10 @@ export default async function LocaleLayout({
 
   const messages = await getMessages();
 
-  return <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>;
+  return (
+    <NextIntlClientProvider messages={messages}>
+      <HtmlLangDir />
+      {children}
+    </NextIntlClientProvider>
+  );
 }
