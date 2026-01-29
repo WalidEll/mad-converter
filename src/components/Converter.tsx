@@ -2,6 +2,7 @@
 
 import {useMemo, useState} from 'react';
 import {useLocale, useTranslations} from 'next-intl';
+import LanguageDropdown from '@/components/LanguageDropdown';
 
 type Unit = 'MAD' | 'RYAL' | 'FRANC';
 
@@ -84,15 +85,21 @@ export default function Converter() {
     <div className="w-full max-w-xl rounded-2xl border border-white/10 bg-white/95 p-6 shadow-xl backdrop-blur">
       <div className="mb-5 flex items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{t('title')}</h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-2xl font-semibold tracking-tight text-slate-900">{t('title')}</h1>
+            <div
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-lg"
+              title="Morocco"
+              aria-label="Morocco flag"
+            >
+              🇲🇦
+            </div>
+          </div>
           <p className="mt-1 text-sm text-slate-600">{t('subtitle')}</p>
         </div>
-        <div
-          className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-xl"
-          title="Morocco"
-          aria-label="Morocco flag"
-        >
-          🇲🇦
+
+        <div className="shrink-0 pt-1">
+          <LanguageDropdown />
         </div>
       </div>
 
